@@ -1,9 +1,11 @@
-FROM tomcat:9.0
+FROM tomcat:9.0-jdk17
 
 # حذف التطبيقات الافتراضية
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# نسخ webapp إلى Tomcat ROOT
-COPY src/main/webapp/ /usr/local/tomcat/webapps/ROOT/
+# نسخ ملف WAR إلى Tomcat
+COPY target/LoginV.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
